@@ -21,4 +21,12 @@ class JobRepositoryImpl implements JobRepository {
 
     await jobDataSource.addDummyJobs(jobsModel);
   }
+
+  @override
+  Future<List<Job>> updateJob(Job job) async {
+    final jobModel = JobModel.fromEntity(job);
+    final jobsModel = await jobDataSource.updateJob(jobModel);
+
+    return jobsModel.map((j) => j.toEntity()).toList();
+  }
 }

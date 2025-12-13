@@ -5,8 +5,9 @@ import 'package:driver_app/features/drive/data/models/job_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class JobDataSource {
-  Future<List<JobModel>> getAllJobs();
   Future<void> addDummyJobs(List<JobModel> jobs);
+  Future<List<JobModel>> getAllJobs();
+  Future<List<JobModel>> updateJob(JobModel job);
 }
 
 class JobDataSourceImpl implements JobDataSource {
@@ -14,6 +15,15 @@ class JobDataSourceImpl implements JobDataSource {
   final SharedPreferences prefs;
 
   JobDataSourceImpl({required this.prefs});
+
+  @override
+  Future<void> addDummyJobs(List<JobModel> jobs) async {
+    try {
+      _saveJobs(jobs);
+    } catch (e) {
+      log('Error adding dummy jobs: $e');
+    }
+  }
 
   @override
   Future<List<JobModel>> getAllJobs() async {
@@ -32,19 +42,27 @@ class JobDataSourceImpl implements JobDataSource {
   }
 
   @override
-  Future<void> addDummyJobs(List<JobModel> jobs) async {
+  Future<List<JobModel>> updateJob(JobModel job) async {
     try {
-      final jobsJson = jobs.map((j) => j.toJson()).toList();
+      final jobs = await getAllJobs();
+      final index = jobs.indexWhere((j) => j.id == job.id);
 
-      _saveJobs(jobsJson);
+      if (index != -1) jobs[index] = job;
+
+      _saveJobs(jobs);
+      
+      return jobs;
     } catch (e) {
-      log('Error adding dummy jobs: $e');
+      log('Error updating job: $e');
+      return [];
     }
   }
 
-  Future<void> _saveJobs(List<Map<String, dynamic>> jobs) async {
+  Future<void> _saveJobs(List<JobModel> jobs) async {
     try {
-      await prefs.setString(_key, jsonEncode(jobs));
+      final jobsJson = jobs.map((j) => j.toJson()).toList();
+
+      await prefs.setString(_key, jsonEncode(jobsJson));
     } catch (e) {
       log('Error saving jobs: $e');
     }
