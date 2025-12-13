@@ -1,4 +1,5 @@
 import 'package:driver_app/features/drive/data/datasources/job_datasource.dart';
+import 'package:driver_app/features/drive/data/models/job_model.dart';
 import 'package:driver_app/features/drive/domain/entities/job.dart';
 import 'package:driver_app/features/drive/domain/repositories/job_repository.dart';
 
@@ -12,5 +13,12 @@ class JobRepositoryImpl implements JobRepository {
     final jobsModel = await jobDataSource.getAllJobs();
 
     return jobsModel.map((j) => j.toEntity()).toList();
+  }
+
+  @override
+  Future<void> addDummyJobs(List<Job> jobs) async {
+    final jobsModel = jobs.map((j) => JobModel.fromEntity(j)).toList(); 
+
+    await jobDataSource.addDummyJobs(jobsModel);
   }
 }
