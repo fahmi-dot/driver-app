@@ -42,6 +42,33 @@ final updateJobUseCaseProvider = Provider<UpdateJobUseCase>((ref) {
   return UpdateJobUseCase(repository);
 });
 
+final pendingJobsProvider = Provider<List<Job>>((ref) {
+  final jobs = ref.watch(jobProvider);
+
+  return jobs.maybeWhen(
+    data: (job) => job.where((j) => j.status == JobStatus.pending).toList(),
+    orElse: () => [],
+  );
+}); 
+
+final ongoingJobsProvider = Provider<List<Job>>((ref) {
+  final jobs = ref.watch(jobProvider);
+
+  return jobs.maybeWhen(
+    data: (job) => job.where((j) => j.status == JobStatus.ongoing).toList(),
+    orElse: () => [],
+  );
+}); 
+
+final completedJobsProvider = Provider<List<Job>>((ref) {
+  final jobs = ref.watch(jobProvider);
+
+  return jobs.maybeWhen(
+    data: (job) => job.where((j) => j.status == JobStatus.completed).toList(),
+    orElse: () => [],
+  );
+}); 
+
 final jobProvider = AsyncNotifierProvider.autoDispose<JobNotifier, List<Job>>(
   JobNotifier.new,
 );
@@ -141,6 +168,10 @@ class JobNotifier extends AsyncNotifier<List<Job>> {
     } catch (e, stackTrace) {
       state = AsyncError(e, stackTrace);
     }
+  }
+
+  Future<Job> getJobById(String id) async {
+    return _getJobById(id)!;
   }
 
   Future<void> startJob(String id) async {
