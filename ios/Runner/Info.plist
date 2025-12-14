@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>The application requires camera access to take photos</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The application requires location access to confirm GPS coordinates</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>The application requires location access to confirm GPS coordinates.</string>
 </dict>
 </plist>
