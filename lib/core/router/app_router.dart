@@ -3,16 +3,20 @@ import 'package:driver_app/features/drive/presentation/screens/home_screen.dart'
 import 'package:driver_app/features/drive/presentation/screens/job_detail_screen.dart';
 import 'package:driver_app/features/drive/presentation/screens/photo_preview_screen.dart';
 import 'package:driver_app/features/drive/presentation/screens/stop_action_screen.dart';
+import 'package:driver_app/shared/screens/gate_screen.dart';
+import 'package:driver_app/shared/screens/setting_screen.dart';
 import 'package:driver_app/shared/screens/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class Routes {
   static const splash = '/';
+  static const gate = '/gate';
   static const home = '/home';
   static const jobDetail = '/job/:id';
   static const stopAction = '/stop';
   static const cameraAction = '/camera';
   static const photoPreview = '/photo';
+  static const settings = '/settings';
 
   static String jobWithId(String id) => '/job/$id';
 }
@@ -23,6 +27,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: Routes.splash,
       builder: (context, state) => SplashScreen(),
+    ),
+    GoRoute(
+      path: Routes.gate,
+      builder: (context, state) => GateScreen(),
     ),
     GoRoute(
       path: Routes.home,
@@ -55,6 +63,10 @@ final appRouter = GoRouter(
         final extra = state.extra as Map<String, dynamic>;
         return PhotoPreviewScreen(mediaPath: extra['mediaPath']);
       },
+    ),
+    GoRoute(
+      path: Routes.settings,
+      builder: (context, state) => SettingsScreen(),
     ),
   ]
 );
