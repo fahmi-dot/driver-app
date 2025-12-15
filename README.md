@@ -4,12 +4,16 @@ Aplikasi mobile untuk driver untuk mengelola pekerjaan dengan fitur kamera dan G
 
 ## 📸 Screenshot Aplikasi
 
-<img src="screenshots/home_pending_light.png" width="200">
-<img src="screenshots/home_pending_dark.png" width="200">
-<img src="screenshots/home_ongoing.png" width="200">
-<img src="screenshots/home_completed.png" width="200">
-<img src="screenshots/job_detail.png" width="200">
-<img src="screenshots/stop_action.png" width="200">
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+  <img src="screenshots/gate.png" width="200">
+  <img src="screenshots/home_pending_light.png" width="200">
+  <img src="screenshots/home_pending_dark.png" width="200">
+  <img src="screenshots/home_ongoing.png" width="200">
+  <img src="screenshots/home_completed.png" width="200">
+  <img src="screenshots/job_detail.png" width="200">
+  <img src="screenshots/stop_action.png" width="200">
+  <img src="screenshots/settings.png" width="200">
+</div>
 
 ## 🎯 Fitur Utama & Unduh
 
@@ -17,6 +21,7 @@ Aplikasi mobile untuk driver untuk mengelola pekerjaan dengan fitur kamera dan G
 - Multiple stops per job (Pickup & Dropoff)
 - Ambil foto bukti lokasi menggunakan kamera
 - Konfirmasi koordinat GPS otomatis
+- Biometric menggunakan Fingerprint
 - Penyimpanan data lokal dengan SharedPreferences
 - UI yang clean dan user-friendly
 - State management dengan Riverpod
