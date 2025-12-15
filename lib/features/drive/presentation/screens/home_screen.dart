@@ -110,6 +110,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with SingleTickerProvid
                               style: TextStyle(
                                 color: Theme.of(context).colorScheme.onSurfaceVariant,
                                 fontSize: AppSizes.fontL,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
