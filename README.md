@@ -1,8 +1,8 @@
-# Driver App (UDrive) - Aplikasi Driver Sederhana
+# Driver App (UDrive) - Simple Driver App
 
-Aplikasi mobile untuk driver untuk mengelola pekerjaan dengan fitur kamera dan GPS.
+A application for drivers to manage their work with camera, GPS, and biometric features, developed using Clean Architecture, MVVM pattern, and Riverpod state management.
 
-## 📸 Screenshot Aplikasi
+## 📸 Screenshots & 🔗 Download Link
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
   <img src="screenshots/gate.png" width="175">
@@ -15,69 +15,120 @@ Aplikasi mobile untuk driver untuk mengelola pekerjaan dengan fitur kamera dan G
   <img src="screenshots/settings.png" width="175">
 </div>
 
-## 🎯 Fitur Utama & Unduh
+- Downlaod link: https://drive.google.com/file/d/1MMuxF5wavCBCo0ZVg6bx9AbIDe6Pz1Et/view?usp=sharing
 
-- Manajemen pekerjaan dengan status: Tertunda, Berlangsung, Selesai
+## ✨ Features
+
+- Job management with status: Pending, Ongoing, Completed
 - Multiple stops per job (Pickup & Dropoff)
-- Ambil foto bukti lokasi menggunakan kamera
-- Konfirmasi koordinat GPS otomatis
-- Biometric menggunakan Fingerprint
-- Penyimpanan data lokal dengan SharedPreferences
-- UI yang clean dan user-friendly
-- State management dengan Riverpod
+- Take photo of location proof using camera
+- Automatic GPS coordinate confirmation
+- Biometric using Fingerprint
+- Light and dark themes
+- Local data storage with SharedPreferences
+- Clean and user-friendly UI
+- State management using Riverpod
 
-- Link unduh: https://drive.google.com/file/d/1MMuxF5wavCBCo0ZVg6bx9AbIDe6Pz1Et/view?usp=sharing
+## 🏗️ Architecture
 
-## 📱 Cara Menggunakan Aplikasi
+Using **Clean Architecture** with 3 layers:
 
-### 1. Melihat Daftar Pekerjaan
+- **Domain Layer**: Entities, Repositories, UseCases
+- **Data Layer**: Models, DataSources (Local), Repository Implementations
+- **Presentation Layer**: Providers (MVVM), Screens
 
-- Buka aplikasi, akan melihat 3 tab: Tertunda, Berlangsung, dan Selesai
-- Tekan pada salah satu pekerjaan untuk melihat detail
+## 📦 Tech Stack
 
-### 2. Memulai Pekerjaan
+- **State Management**: Riverpod
+- **Architecture**: Clean Architecture + MVVM
+- **Local Authentication**: local_auth
+- **Local Storage**: shared_preferences
+- **Permission**: permission_handler
+- **Location**: geolocator
+- **Path**: path_provider
 
-- Pilih pekerjaan pada tab Tertunda
-- Tekan tombol "Mulai Pekerjaan"
-- Konfirmasi untuk memulai pekerjaan
-- Status pekerjaan akan berubah menjadi Berlangsung
-- Pekerjaan akan pindah ke tab Berlangsung
+## 🚀 Getting Started
 
-### 3. Menyelesaikan Stop
+### 1. Install Dependencies
 
-Untuk setiap stop, harus menyelesaikan 2 langkah:
+```bash
+flutter pub get
+```
 
-#### Langkah 1: Ambil Foto
-- Tekan stop sesuai urutan
-- Tekan bagian "Ambil Foto"
-- Ambil foto dan pratinjau foto akan muncul
-- Pilih "Gunakan Foto" atau "Ambil Ulang"
+### 2. Run
 
-#### Langkah 2: Konfirmasi GPS
-- Tekan bagian "Konfirmasi Koordinat Lokasi"
-- GPS akan otomatis mendapatkan koordinat
+```bash
+flutter run
+```
 
-#### Selesaikan Stop
-- Tekan tombol "Selesaikan Stop"
-- Stop akan diberi status Selesai
+## 🎨 Theme
 
-### 4. Menyelesaikan Job
+The app supports light and dark themes.
 
-- Setelah semua stop diselesaikan
-- Pekerjaan otomatis berubah status menjadi Selesai
-- Pekerjaan akan pindah ke tab Selesai
-
-
-## 📝 Validasi pada Aplikasi
+## 📝 Validation on the Application
 
 **Job Management**
-- Tidak bisa start job ketika ada job lain yang sedang ongoing
-- Tidak bisa complete stop jika belum ambil foto dan GPS
+- Cannot start a job when another job is ongoing
+- Cannot complete a stop if not take a photo of location and confirm GPS
 
 **Stop Validation**
-- Harus ambil foto
-- Harus konfirmasi GPS
-- Kedua langkah harus diselesaikan agar bisa tekan "Selesaikan Stop"
+- Must take a photo of location
+- Must confirm GPS
+- Both steps must be completed in order to press “Complete Stop”
 
 **Auto Complete Job**
-- Job otomatis complete jika semua stop sudah selesai
+- Job automatically completes when all stops are finished
+
+## 🔧 Dependencies
+
+```yaml
+dependencies:  
+  dartz: ^0.10.1                # Functional programming
+  equatable: ^2.0.7             # Value comparison
+  geocoding: ^4.0.0             # Geocoding
+  geolocator: ^14.0.2           # Location
+  get: ^4.7.3                   # State management
+  heroicons: ^0.11.0            # Icons
+  http: ^1.6.0                  # API calls
+  intl: ^0.20.2                 # Formatter
+  shared_preferences: ^2.5.3    # Local storage
+```
+
+## 📱 How to Use the App
+
+### 1. Viewing the Job List
+
+- Open the app, you will see 3 tabs: Pending, Ongoing, and Completed
+- Tap on a job to view its details
+
+### 2. Starting a Job
+
+- Select a job from the Pending tab
+- Tap the “Start Job” button
+- Confirm to start the job
+- The job status will change to Ongoing
+- The job will move to the Ongoing tab
+
+### 3. Completing a Stop
+
+For each stop, you must complete 2 steps:
+
+#### Step 1: Take a Photo
+- Tap the stop in order
+- Tap the “Take Photo” section
+- Take a photo and a preview of the photo will appear
+- Select “Use Photo” or “Retake”
+
+#### Step 2: Confirm GPS
+- Tap the “Confirm Location Coordinates” section
+- GPS will automatically obtain the coordinates
+
+#### Complete Stop
+- Tap the “Complete Stop” button
+- The stop status will change to Completed
+
+### 4. Completing the Job
+
+- After all stops are completed
+- The job will automatically change its status to Completed
+- The job will move to the Completed tab
